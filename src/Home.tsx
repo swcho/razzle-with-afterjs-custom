@@ -7,12 +7,15 @@ import logo from './react.svg';
 
 type InitialProps = AfterRenderProps<{}> & RouteChildrenProps;
 
-class Home extends Component {
+class Home extends Component<Home.Props> {
   static async getInitialProps({ req, res, match, history, location, ...ctx }: InitialProps) {
     return { whatever: 'stuff' };
   }
 
   render() {
+    const {
+      whatever,
+    } = this.props;
     return (
       <div className="Home">
         <div className="Home-header">
@@ -27,6 +30,12 @@ class Home extends Component {
       </div>
     );
   }
+}
+
+namespace Home {
+  export type Props = {
+
+  };
 }
 
 export default Home;
