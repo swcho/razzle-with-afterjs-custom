@@ -1,10 +1,14 @@
+import { AfterRenderProps } from '@jaredpalmer/after';
 import React, { Component } from 'react';
-import logo from './react.svg';
-import './Home.css';
+import { RouteChildrenProps } from 'react-router';
 import { Link } from 'react-router-dom';
+import './Home.css';
+import logo from './react.svg';
+
+type InitialProps = AfterRenderProps<{}> & RouteChildrenProps;
 
 class Home extends Component {
-  static async getInitialProps({ req, res, match, history, location, ...ctx }) {
+  static async getInitialProps({ req, res, match, history, location, ...ctx }: InitialProps) {
     return { whatever: 'stuff' };
   }
 
