@@ -1,8 +1,9 @@
 import React from 'react';
 
 import { asyncComponent } from '@jaredpalmer/after';
+import { RouteProps } from 'react-router-dom';
 
-export default [
+const routes: RouteProps[] = [
   {
     path: '/',
     exact: true,
@@ -20,3 +21,5 @@ export default [
     }),
   },
 ];
+
+export default routes;
