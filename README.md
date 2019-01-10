@@ -19,3 +19,17 @@ yarn start
 ## Idea behind the example
 
 This is a basic, bare-bones example of how to use After.js and Razzle.
+
+## Check List
+
+* [*] TypeScript 지원
+* [ ] Css 운용 유연성
+  * [ ] 선택적 css text
+  * [ ] 선택적 css module
+* [ ] Redux
+* [ ] 라우팅
+* [ ] Dirty detect
+* [ ] Storybook 지원
+* [ ] Fetch/mock
+* [ ] Jest snapshot test
+* [ ] Graphql
