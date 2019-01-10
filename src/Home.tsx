@@ -8,7 +8,7 @@ import logo from './react.svg';
 type InitialProps = AfterRenderProps<{}> & RouteChildrenProps;
 
 class Home extends Component<Home.Props> {
-  static async getInitialProps({ req, res, match, history, location, ...ctx }: InitialProps) {
+  static async getInitialProps({ req, res, match, history, location, ...ctx }: InitialProps): Promise<Home.Props> {
     return { whatever: 'stuff' };
   }
 
@@ -20,7 +20,7 @@ class Home extends Component<Home.Props> {
       <div className="Home">
         <div className="Home-header">
           <img src={logo} className="Home-logo" alt="logo" />
-          <h2>Welcome to After.js</h2>
+          <h2>Welcome to After.js: {whatever}</h2>
         </div>
         <p className="Home-intro">
           To get started, edit <code>src/Home.js</code> or{' '}
@@ -34,7 +34,7 @@ class Home extends Component<Home.Props> {
 
 namespace Home {
   export type Props = {
-
+    whatever: string;
   };
 }
 
