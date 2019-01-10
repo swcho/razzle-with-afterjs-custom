@@ -2,7 +2,7 @@ import { AfterRenderProps } from '@jaredpalmer/after';
 import React, { Component } from 'react';
 import { RouteChildrenProps } from 'react-router';
 import { Link } from 'react-router-dom';
-import './Home.css';
+import './Home.scss';
 import logo from './react.svg';
 
 type InitialProps = AfterRenderProps<{}> & RouteChildrenProps;
