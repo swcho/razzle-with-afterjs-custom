@@ -2,7 +2,7 @@ import { AfterRenderProps } from '@jaredpalmer/after';
 import React, { Component } from 'react';
 import { RouteChildrenProps } from 'react-router';
 import { Link } from 'react-router-dom';
-import './Home.scss';
+const  S = require('./Home.scss');
 import logo from './react.svg';
 
 type InitialProps = AfterRenderProps<{}> & RouteChildrenProps;
@@ -17,12 +17,12 @@ class Home extends Component<Home.Props> {
       whatever,
     } = this.props;
     return (
-      <div className="Home">
-        <div className="Home-header">
-          <img src={logo} className="Home-logo" alt="logo" />
+      <div className={S.Home}>
+        <div className={S.header}>
+          <img src={logo} className={S.logo} alt="logo" />
           <h2>Welcome to After.js: {whatever}</h2>
         </div>
-        <p className="Home-intro">
+        <p className={S.intro}>
           To get started, edit <code>src/Home.js</code> or{' '}
           <code>src/About.js</code>and save to reload.
         </p>
