@@ -25,8 +25,10 @@ This is a basic, bare-bones example of how to use After.js and Razzle.
 * [*] TypeScript 지원
 * [*] Debugability:
   * <https://github.com/jaredpalmer/razzle/issues/546#issuecomment-377628210>
+* [*] eslint with type
 * [ ] Css 운용 유연성
-  * [*] 선택적 css text: development는 css loader 사용하고 배포시 css 파일 생성
+  * [ ] less
+  * [ ] 선택적 css text
   * [*] 선택적 css module
 * [ ] Redux
 * [ ] 라우팅

@@ -1,22 +1,19 @@
-
-const path = require('path')
+'use strict';
 
 module.exports = {
-  plugins: ['typescript'],
-  modify(config, { target, dev }, webpack) {
-    for (const rule of config.module.rules) {
-      if (rule.test && rule.test.toString() === "/\\.module\\.css$/") {
-        const scss = { ...rule };
+  plugins: [
+    'typescript',
+    {
+      func: require('./razzle-plugins/styles'),
+    },
+  ],
+  // modify(config, { target, dev }, webpack) {
+  //   console.log(target, dev)
+  //   console.log(JSON.stringify(config, null, 2))
+  //   for (const rule of config.module.rules) {
+  //     if (rule.test && rule.test.toString() === "/\\.(js|jsx|mjs)$/") {
+  //       console.log(JSON.stringify(rule, null, 2))
 
-        scss.test = /\.scss$/;
-        scss.include = path.join(__dirname, "src");
-        scss.use.push({ loader: "sass-loader" });
+  //     }
 
-        config.module.rules.push(scss);
-
-        break;
-      }
-    }
-    return config;
-  }
 };
