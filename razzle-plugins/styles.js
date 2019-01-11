@@ -31,14 +31,12 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
   config.module.rules.push({
     test: /\.less$/,
     // exclude: [paths.appBuild],
-    use: IS_NODE
+    use: IS_DEV
       ? [
         {
           loader: require.resolve('simple-universal-style-loader'),
         },
         {
-          // on the server we do not need to embed the css and just want the identifier mappings
-          // https://github.com/webpack-contrib/css-loader#scope
           loader: require.resolve('css-loader'),
           options: {
             modules: true,
@@ -58,51 +56,27 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
           },
         },
       ]
-      : IS_DEV
-        ? [
-          {
-            loader: require.resolve('simple-universal-style-loader'),
+      : [
+        {
+          loader: require.resolve('simple-universal-style-loader'),
+        },
+        {
+          loader: require.resolve('css-loader'),
+          options: {
+            modules: true,
+            importLoaders: 1,
+            minimize: true,
+            localIdentName,
           },
-          {
-            loader: require.resolve('css-loader'),
-            options: {
-              modules: true,
-              importLoaders: 1,
-              localIdentName,
-              sourceMap: true,
-            },
-          },
-          {
-            loader: require.resolve('postcss-loader'),
-            options: Object.assign(postCssOptions, { sourceMap: true }) ,
-          },
-          {
-            loader: require.resolve('less-loader'),
-            options: {
-              sourceMap: true,
-            },
-          },
-        ]
-        : [
-          // MiniCssExtractPlugin.loader,
-          {
-            loader: require.resolve('css-loader'),
-            options: {
-              modules: true,
-              importLoaders: 1,
-              minimize: true,
-              localIdentName,
-            },
-          },
-          {
-            loader: require.resolve('postcss-loader'),
-            options: postCssOptions,
-          },
-          {
-            loader: require.resolve('less-loader'),
-          },
-        ],
-
+        },
+        {
+          loader: require.resolve('postcss-loader'),
+          options: postCssOptions,
+        },
+        {
+          loader: require.resolve('less-loader'),
+        },
+      ],
   })
   return config;
 }
