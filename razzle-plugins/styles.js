@@ -34,23 +34,34 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
     use: IS_NODE
       ? [
         {
+          loader: require.resolve('simple-universal-style-loader'),
+        },
+        {
           // on the server we do not need to embed the css and just want the identifier mappings
           // https://github.com/webpack-contrib/css-loader#scope
-          loader: require.resolve('css-loader/locals'),
+          loader: require.resolve('css-loader'),
           options: {
             modules: true,
             importLoaders: 1,
             localIdentName,
+            sourceMap: true,
           },
         },
         {
+          loader: require.resolve('postcss-loader'),
+          options: Object.assign(postCssOptions, { sourceMap: true }) ,
+        },
+        {
           loader: require.resolve('less-loader'),
+          options: {
+            sourceMap: true,
+          },
         },
       ]
       : IS_DEV
         ? [
           {
-            loader: require.resolve('style-loader'),
+            loader: require.resolve('simple-universal-style-loader'),
           },
           {
             loader: require.resolve('css-loader'),

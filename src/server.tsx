@@ -1,5 +1,6 @@
 import { render } from '@jaredpalmer/after';
 import express from 'express';
+import { getStyles } from 'simple-universal-style-loader';
 import routes from './routes';
 
 if (!process.env.RAZZLE_ASSETS_MANIFEST) {
@@ -13,6 +14,7 @@ server
   .disable('x-powered-by')
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR || 'static'))
   .get('/*', async (req, res) => {
+    const styles = getStyles();
     try {
       const html = await render({
         req,
@@ -24,7 +26,11 @@ server
         // e.g a redux store...
         customThing: 'thing',
       });
-      res.send(html);
+      const styleStrs = styles
+        .map(
+          (s) => `<style text="text/css" key="${s.id}">${s.parts.map((p) => p.css).join('')}</style>`)
+        .join('');
+      res.send((html || '').replace('</head>', `${styleStrs}</head>`));
     } catch (error) {
       res.json(error);
     }
