@@ -26,10 +26,13 @@ This is a basic, bare-bones example of how to use After.js and Razzle.
 * [*] Debugability:
   * <https://github.com/jaredpalmer/razzle/issues/546#issuecomment-377628210>
 * [*] eslint with type
-* [ ] Css 운용 유연성
-  * [ ] less
-  * [ ] 선택적 css text
-  * [*] 선택적 css module
+* [ ] CSS Flexibility
+  * [*] less
+  * [*] CSS module
+  * [ ] Common component style to text
+  * [ ] CSS SSR Awareness(not adding style if exists)
+* [ ] SEO
+  * [ ] Dynamic title
 * [ ] Redux
 * [ ] 라우팅
 * [ ] Dirty detect

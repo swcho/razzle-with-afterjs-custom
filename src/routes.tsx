@@ -20,6 +20,14 @@ const routes: RouteProps[] = [
       Placeholder: () => <div>...LOADING...</div>, // this is optional, just returns null by default
     }),
   },
+  {
+    path: '/*',
+    exact: true,
+    component: asyncComponent({
+      loader: () => import('./AppPage'), // required
+      Placeholder: () => <div>...LOADING...</div>, // this is optional, just returns null by default
+    }),
+  },
 ];
 
 export default routes;

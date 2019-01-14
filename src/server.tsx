@@ -15,6 +15,7 @@ server
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR || 'static'))
   .get('/*', async (req, res) => {
     const styles = getStyles();
+    (styles || []).length = 0;
     try {
       const html = await render({
         req,
@@ -26,7 +27,7 @@ server
         // e.g a redux store...
         customThing: 'thing',
       });
-      const styleStrs = styles
+      const styleStrs = getStyles()
         .map(
           (s) => `<style text="text/css" key="${s.id}">${s.parts.map((p) => p.css).join('')}</style>`)
         .join('');
