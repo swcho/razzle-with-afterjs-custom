@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
+import S from './About.less';
+
 class About extends Component {
   render() {
-    return <div>about</div>;
+    return <div className={S.About}>about</div>;
   }
 }
 

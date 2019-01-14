@@ -4,6 +4,7 @@ import { RouteChildrenProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import S from './Home.less';
 import logo from './react.svg';
+import './reset.common.less';
 
 type InitialProps = AfterRenderProps<{}> & RouteChildrenProps;
 

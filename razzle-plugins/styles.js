@@ -1,5 +1,7 @@
 'use strict';
 
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 const autoprefixer = require('autoprefixer');
 const postCssOptions = {
   ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
@@ -28,9 +30,88 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
     // config.devtool = 'eval'
   }
   const localIdentName = '[path][name]_[local]';
+  const RE_COMMON = /\.common\.less$/;
+  if (!config.optimization) {
+    config.optimization = {};
+  }
+  if (!config.optimization.splitChunks) {
+    config.optimization.splitChunks = {
+      // chunks: 'all'
+      cacheGroups: {
+        styles: {
+          name: 'styles',
+          test: /\.common.less$/,
+          chunks: 'all',
+          enforce: true,
+        }
+      }
+    }
+  }
+
+  config.plugins.push(new MiniCssExtractPlugin({
+    filename: '[name].css'
+    // chunkFilename: IS_DEV ? '[id].css' : '[id].[hash].css',
+  }));
+
+  config.module.rules.push({
+    test: RE_COMMON,
+    // exclude: [paths.appBuild],
+    // use: [
+    //   MiniCssExtractPlugin.loader,
+    //   "css-loader",
+    //   "less-loader",
+    // ]
+    use: IS_DEV
+      ? [
+        {
+          loader: MiniCssExtractPlugin.loader,
+        },
+        {
+          loader: require.resolve('css-loader'),
+          options: {
+            modules: true,
+            importLoaders: 1,
+            localIdentName,
+            sourceMap: true,
+          },
+        },
+        {
+          loader: require.resolve('postcss-loader'),
+          options: Object.assign(postCssOptions, { sourceMap: true }) ,
+        },
+        {
+          loader: require.resolve('less-loader'),
+          options: {
+            sourceMap: true,
+          },
+        },
+      ]
+      : [
+        {
+          loader: MiniCssExtractPlugin.loader,
+        },
+        {
+          loader: require.resolve('css-loader'),
+          options: {
+            modules: true,
+            importLoaders: 1,
+            minimize: true,
+            localIdentName,
+          },
+        },
+        {
+          loader: require.resolve('postcss-loader'),
+          options: postCssOptions,
+        },
+        {
+          loader: require.resolve('less-loader'),
+        },
+      ],
+  });
+
   config.module.rules.push({
     test: /\.less$/,
-    // exclude: [paths.appBuild],
+    exclude: [RE_COMMON],
     use: IS_DEV
       ? [
         {
@@ -77,6 +158,6 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
           loader: require.resolve('less-loader'),
         },
       ],
-  })
+  });
   return config;
 }

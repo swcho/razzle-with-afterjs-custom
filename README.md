@@ -29,8 +29,8 @@ This is a basic, bare-bones example of how to use After.js and Razzle.
 * [ ] CSS Flexibility
   * [*] less
   * [*] CSS module
-  * [ ] Common component style to text
-  * [ ] CSS SSR Awareness(not adding style if exists)
+  * [*] Common component style to text
+  * [ ] CSS SSR Awareness(not adding style if exists): Requires new plugin dev
 * [ ] SEO
   * [ ] Dynamic title
 * [ ] Redux

@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import S from './App.less';
+import S from './App.common.less';
 import { Header } from './Header';
 
 export class App extends React.Component<App.Props> {

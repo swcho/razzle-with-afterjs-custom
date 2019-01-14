@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import S from './Header.less';
+import S from './Header.common.less';
 
 export class Header extends React.Component<Header.Props> {
   render() {
