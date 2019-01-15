@@ -11,6 +11,7 @@
   "dependencies": {
     "@jaredpalmer/after": "latest",
     "express": "^4.16.2",
+    "prop-types": "^15.6.2",
     "razzle": "^2.4.1",
     "razzle-plugin-typescript": "^2.4.1",
     "react": "^16.2.0",
@@ -26,6 +27,7 @@
     "@types/react-router-dom": "^4.3.1",
     "@types/webpack": "^4.4.22",
     "@types/webpack-env": "^1.13.6",
+    "isomorphic-style-loader": "^4.0.0",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.5.0",

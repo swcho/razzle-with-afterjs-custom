@@ -1,4 +1,5 @@
 import { AfterRenderProps } from '@jaredpalmer/after';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import React, { Component } from 'react';
 import { RouteChildrenProps } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -39,4 +40,4 @@ namespace Home {
   };
 }
 
-export default Home;
+export default withStyles(S)(Home);

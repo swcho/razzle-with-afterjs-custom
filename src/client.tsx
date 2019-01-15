@@ -3,12 +3,21 @@ import React from 'react';
 import { hydrate } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import routes from './routes';
+import { StyleProvider } from './StyleProvider';
+
+const insertCssProxy = (...cssList: any[]) => {
+  cssList.forEach((css) => css._insertCss());
+};
 
 ensureReady(routes).then((data) =>
   hydrate(
-    <BrowserRouter>
-      <After data={data} routes={routes} />
-    </BrowserRouter>,
+    <StyleProvider
+      insertCss={insertCssProxy}
+    >
+      <BrowserRouter>
+        <After data={data} routes={routes} />
+      </BrowserRouter>
+    </StyleProvider>,
     document.getElementById('root')
   )
 );

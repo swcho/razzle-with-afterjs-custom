@@ -115,7 +115,7 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
     use: IS_DEV
       ? [
         {
-          loader: require.resolve('simple-universal-style-loader'),
+          loader: require.resolve('isomorphic-style-loader'),
         },
         {
           loader: require.resolve('css-loader'),
@@ -139,7 +139,7 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
       ]
       : [
         {
-          loader: require.resolve('simple-universal-style-loader'),
+          loader: require.resolve('isomorphic-style-loader'),
         },
         {
           loader: require.resolve('css-loader'),
