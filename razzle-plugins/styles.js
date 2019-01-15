@@ -24,7 +24,7 @@ const postCssOptions = {
  */
 module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
   console.log(target, dev, userOptions);
-  // const IS_NODE = target === 'node';
+  const IS_NODE = target === 'node';
   const IS_DEV = dev;
   if (IS_DEV) {
     // config.devtool = 'eval'
@@ -115,7 +115,10 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
     use: IS_DEV
       ? [
         {
-          loader: require.resolve('simple-universal-style-loader'),
+          loader: IS_NODE ? require.resolve('style-loader/universal') : require.resolve('style-loader'),
+          options: {
+            universal: true,
+          }
         },
         {
           loader: require.resolve('css-loader'),
