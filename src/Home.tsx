@@ -19,8 +19,8 @@ class Home extends Component<Home.Props> {
       match,
       ...rest
     } = props;
-    console.log('getInitialProps', {
-      req: !!req, res: !!res, history: !!history, location: !!location, match: !!match, rest});
+    // console.log('getInitialProps', {
+    //   req: !!req, res: !!res, history: !!history, location: !!location, match: !!match, rest});
     return { whatever: 'stuff' };
   }
 
@@ -28,7 +28,7 @@ class Home extends Component<Home.Props> {
     const {
       whatever,
     } = this.props;
-    console.log('render', this.props);
+    // console.log('render', this.props);
     return (
       <div className={S.Home}>
         <div className={S.header}>

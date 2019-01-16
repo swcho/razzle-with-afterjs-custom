@@ -43,13 +43,13 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
         vendor: {
           name: 'vendor',
           test: RE_VENDOR_CSS,
-          chunks: 'all',
+          // chunks: 'initial',
           enforce: true,
         },
         common: {
           name: 'common',
           test: RE_COMMON,
-          chunks: 'all',
+          // chunks: 'initial',
           enforce: true,
         }
       }

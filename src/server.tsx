@@ -2,7 +2,6 @@ import { render } from '@jaredpalmer/after';
 import express from 'express';
 import * as React from 'react';
 import * as ReactDOMServer from 'react-dom/server';
-import { getStyles } from 'simple-universal-style-loader';
 import routes from './routes';
 import { StyleProvider } from './StyleProvider';
 
@@ -52,22 +51,12 @@ server
     const htmlWithCommonCss = (html || '')
       .replace(
         '</head>', 
-        `<link rel="stylesheet" href="${assets['vendor'].css}">
-        <link rel="stylesheet" href="${assets['common'].css || ''}">
+        `<link rel="stylesheet" href="${assets['vendor'] && assets['vendor'].css || ''}">
+        <link rel="stylesheet" href="${assets['common'] && assets['common'].css || ''}">
         </head>`);
-    const styles = getStyles();
-    if (styles) {
-      const styleStrs = (styles || [])
-        .map((s) => `<style text="text/css" key="${s.id}">${s.parts.map((p) => p.css).join('')}</style>`)
-        .join('');
-      res.send(
-        htmlWithCommonCss
-          .replace('</head>', `${styleStrs}</head>`));
-      return;
-    }
     if (css.length) {
       const styleStrs = css
-        .map((s) => `<style text="text/css" key="${s.id}">${s.css}</style>`)
+        .map((s) => `<style text="text/css" id="s${s.id}-0">${s.css}</style>`)
         .join('');
       res.send(
         htmlWithCommonCss
