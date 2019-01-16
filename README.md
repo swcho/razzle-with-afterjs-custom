@@ -26,17 +26,17 @@ This is a basic, bare-bones example of how to use After.js and Razzle.
 * [*] Debugability:
   * <https://github.com/jaredpalmer/razzle/issues/546#issuecomment-377628210>
 * [*] eslint with type
-* [ ] CSS Flexibility
+* [*] CSS Flexibility
   * [*] less
   * [*] CSS module
   * [*] Common component style to text
-  * [ ] CSS SSR Awareness(not adding style if exists): Requires new plugin dev
+  * [*] CSS SSR Awareness(not adding style if exists): Fail to fork style-loader, use isomorphic-style-loader
+* [ ] Storybook 지원
 * [ ] SEO
   * [ ] Dynamic title
 * [ ] Redux
-* [ ] 라우팅
-* [ ] Dirty detect
-* [ ] Storybook 지원
+* [ ] Routing
+  * [ ] Dirty detect
 * [ ] Fetch/mock
 * [ ] Jest snapshot test
 * [ ] Graphql
