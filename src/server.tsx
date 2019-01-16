@@ -11,14 +11,25 @@ if (!process.env.RAZZLE_ASSETS_MANIFEST) {
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
+function makeAssetTags(asset: any, name: string) {
+  let ret = '';
+  if (asset[name]) {
+    if (asset[name].css) {
+      ret += `<link rel="stylesheet" href="${assets[name].css}"/>\n`;
+    }
+    if (asset[name].js) {
+      ret += `<script type="text/javascript" src="${assets[name].js}"></script>`;
+    }
+  }
+  return ret;
+}
+
 const server = express();
 server
   .disable('x-powered-by')
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR || 'static'))
   .get('/*', async (req, res) => {
-    // const styles = getStyles();
-    // (styles || []).length = 0;
-    const css: Array<{ id: string; css: string; }> = []; // CSS for all rendered React components
+    const css: Array<{ id: string; css: string; }> = [];
     const insertCss = (...styleList: any[]) => styleList.forEach((style) => {
       if (style._getContent) {
         const content = style._getContent();
@@ -51,8 +62,9 @@ server
     const htmlWithCommonCss = (html || '')
       .replace(
         '</head>', 
-        `<link rel="stylesheet" href="${assets['vendor'] && assets['vendor'].css || ''}">
-        <link rel="stylesheet" href="${assets['common'] && assets['common'].css || ''}">
+        `
+        ${makeAssetTags(assets, 'style-vendor')}
+        ${makeAssetTags(assets, 'style-common')}
         </head>`);
     if (css.length) {
       const styleStrs = css

@@ -41,15 +41,15 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
       // chunks: 'all'
       cacheGroups: {
         vendor: {
-          name: 'vendor',
+          name: 'style-vendor',
           test: RE_VENDOR_CSS,
-          // chunks: 'initial',
+          chunks: 'all',
           enforce: true,
         },
         common: {
-          name: 'common',
+          name: 'style-common',
           test: RE_COMMON,
-          // chunks: 'initial',
+          chunks: 'all',
           enforce: true,
         }
       }
@@ -91,7 +91,8 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
     use: IS_DEV
       ? [
         {
-          loader: require.resolve('isomorphic-style-loader'),
+          // loader: require.resolve('isomorphic-style-loader'),
+          loader: MiniCssExtractPlugin.loader,
         },
         {
           loader: require.resolve('css-loader'),

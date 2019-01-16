@@ -6,6 +6,9 @@ module.exports = {
     {
       func: require('./razzle-plugins/styles'),
     },
+    // {
+    //   func: require('./razzle-plugins/build-analyzer'),
+    // },
   ],
   // modify(config, { target, dev }, webpack) {
   //   console.log(target, dev)
