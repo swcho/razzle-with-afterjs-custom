@@ -9,7 +9,7 @@
     "start:prod": "NODE_ENV=production node build/server.js"
   },
   "dependencies": {
-    "@jaredpalmer/after": "latest",
+    "@jaredpalmer/after": "https://github.com/swcho/after.js#custom",
     "express": "^4.16.2",
     "prop-types": "^15.6.2",
     "razzle": "^2.4.1",

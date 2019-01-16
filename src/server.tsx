@@ -37,7 +37,7 @@ server
       // Anything else you add here will be made available
       // within getInitialProps(ctx)
       // e.g a redux store...
-      customThing: 'thing',
+      // customThing: 'thing',
       customRenderer: (element: React.ReactElement<any>) => ({
         html: ReactDOMServer.renderToString((
           <StyleProvider insertCss={insertCss}>

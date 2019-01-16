@@ -1,9 +1,11 @@
 import React from 'react';
 
-import { asyncComponent } from '@jaredpalmer/after';
-import { RouteProps } from 'react-router-dom';
+import { asyncComponent, AsyncRouteProps } from '@jaredpalmer/after';
 
-const routes: RouteProps[] = [
+export type RouteParams = {
+};
+
+const routes: AsyncRouteProps[] = [
   {
     path: '/',
     exact: true,

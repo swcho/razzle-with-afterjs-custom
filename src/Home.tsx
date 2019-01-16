@@ -1,16 +1,27 @@
-import { AfterRenderProps } from '@jaredpalmer/after';
+import { Ctx, InjectedProps } from '@jaredpalmer/after';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import React, { Component } from 'react';
-import { RouteChildrenProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import S from './Home.less';
 import logo from './react.svg';
 import './reset.common.less';
+import { RouteParams } from './routes';
 
-type InitialProps = AfterRenderProps<{}> & RouteChildrenProps;
+// TODO: Define Commonly
+type InitialCtx = Ctx<RouteParams>;
 
 class Home extends Component<Home.Props> {
-  static async getInitialProps({ req, res, match, history, location, ...ctx }: InitialProps): Promise<Home.Props> {
+  static async getInitialProps(props: InitialCtx): Promise<Home.OwnProps> {
+    const {
+      req,
+      res,
+      history,
+      location,
+      match,
+      ...rest
+    } = props;
+    console.log('getInitialProps', {
+      req: !!req, res: !!res, history: !!history, location: !!location, match: !!match, rest});
     return { whatever: 'stuff' };
   }
 
@@ -18,6 +29,7 @@ class Home extends Component<Home.Props> {
     const {
       whatever,
     } = this.props;
+    console.log('render', this.props);
     return (
       <div className={S.Home}>
         <div className={S.header}>
@@ -35,9 +47,15 @@ class Home extends Component<Home.Props> {
 }
 
 namespace Home {
-  export type Props = {
+  export type OwnProps = {
     whatever: string;
   };
+
+  export type InitialProps = InitialCtx & OwnProps;
+
+  export type Props = {
+    whatever: string;
+  } & InjectedProps<InitialProps>;
 }
 
 export default withStyles(S)(Home);
