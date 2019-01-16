@@ -29,8 +29,10 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
   if (IS_DEV) {
     // config.devtool = 'eval'
   }
-  const localIdentName = '[path][name]_[local]';
+
+  const RE_VENDOR_CSS = /(\.vendor\.less$|node_modules\/.*\.css$)/;
   const RE_COMMON = /\.common\.less$/;
+
   if (!config.optimization) {
     config.optimization = {};
   }
@@ -38,29 +40,55 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
     config.optimization.splitChunks = {
       // chunks: 'all'
       cacheGroups: {
-        styles: {
-          name: 'styles',
-          test: /\.common.less$/,
+        vendor: {
+          name: 'vendor',
+          test: RE_VENDOR_CSS,
+          chunks: 'all',
+          enforce: true,
+        },
+        common: {
+          name: 'common',
+          test: RE_COMMON,
           chunks: 'all',
           enforce: true,
         }
       }
     }
   }
-
   config.plugins.push(new MiniCssExtractPlugin({
-    filename: '[name].css'
+    filename: '[name].[hash].css'
     // chunkFilename: IS_DEV ? '[id].css' : '[id].[hash].css',
   }));
 
+
+  const localIdentName = '[path][name]_[local]';
+
+  config.module.rules.push({
+    test: RE_VENDOR_CSS,
+    use: [
+      {
+        loader: MiniCssExtractPlugin.loader,
+      },
+      {
+        loader: require.resolve('css-loader'),
+        options: {
+          localIdentName,
+          importLoaders: 2,
+          minimize: true,
+        },
+      },
+      {
+        loader: require.resolve('postcss-loader'),
+        options: postCssOptions,
+      },
+      {
+        loader: require.resolve('less-loader'),
+      },
+    ]
+  })
+
   config.module.rules.push({
     test: RE_COMMON,
-    // exclude: [paths.appBuild],
-    // use: [
-    //   MiniCssExtractPlugin.loader,
-    //   "css-loader",
-    //   "less-loader",
-    // ]
     use: IS_DEV
       ? [
         {
@@ -69,9 +97,9 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
         {
           loader: require.resolve('css-loader'),
           options: {
-            modules: true,
-            importLoaders: 1,
             localIdentName,
+            modules: true,
+            importLoaders: 2,
             sourceMap: true,
           },
         },
@@ -93,10 +121,10 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
         {
           loader: require.resolve('css-loader'),
           options: {
-            modules: true,
-            importLoaders: 1,
-            minimize: true,
             localIdentName,
+            modules: true,
+            importLoaders: 2,
+            minimize: true,
           },
         },
         {
@@ -111,7 +139,7 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
 
   config.module.rules.push({
     test: /\.less$/,
-    exclude: [RE_COMMON],
+    exclude: [RE_VENDOR_CSS, RE_COMMON],
     use: IS_DEV
       ? [
         {
@@ -121,7 +149,7 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
           loader: require.resolve('css-loader'),
           options: {
             modules: true,
-            importLoaders: 1,
+            importLoaders: 2,
             localIdentName,
             sourceMap: true,
           },
@@ -145,7 +173,7 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
           loader: require.resolve('css-loader'),
           options: {
             modules: true,
-            importLoaders: 1,
+            importLoaders: 2,
             minimize: true,
             localIdentName,
           },

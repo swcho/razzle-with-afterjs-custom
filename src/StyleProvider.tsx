@@ -1,6 +1,7 @@
 
 import PropTypes from 'prop-types';
 import * as React from 'react';
+import './main.vendor.less';
 
 export class StyleProvider extends React.Component<StyleProvider.Props> {
   static childContextTypes = {

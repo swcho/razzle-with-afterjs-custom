@@ -47,7 +47,11 @@ server
       }),
     });
     const htmlWithCommonCss = (html || '')
-      .replace('</head>', `<link rel="stylesheet" href="${assets['styles'].css}"></head>`);
+      .replace(
+        '</head>', 
+        `<link rel="stylesheet" href="${assets['vendor'].css}">
+        <link rel="stylesheet" href="${assets['common'].css}">
+        </head>`);
     const styles = getStyles();
     if (styles) {
       const styleStrs = (styles || [])

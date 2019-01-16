@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import S from './Home.less';
 import logo from './react.svg';
-import './reset.common.less';
 import { RouteParams } from './routes';
 
 // TODO: Define Commonly

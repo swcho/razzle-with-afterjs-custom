@@ -9,8 +9,10 @@
     "start:prod": "NODE_ENV=production node build/server.js"
   },
   "dependencies": {
+    "@blueprintjs/core": "^3.11.0",
     "@jaredpalmer/after": "https://github.com/swcho/after.js#custom",
     "express": "^4.16.2",
+    "normalize.css": "^8.0.1",
     "prop-types": "^15.6.2",
     "razzle": "^2.4.1",
     "razzle-plugin-typescript": "^2.4.1",
