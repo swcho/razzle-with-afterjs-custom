@@ -6,7 +6,7 @@ import routes from './routes';
 import { StyleProvider } from './StyleProvider';
 
 const insertCssProxy = (...cssList: any[]) => {
-  cssList.forEach((css) => css._insertCss());
+  cssList.forEach((css) => css._insertCss && css._insertCss());
 };
 
 ensureReady(routes).then((data) =>
