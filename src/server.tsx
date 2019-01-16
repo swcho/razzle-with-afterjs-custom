@@ -21,13 +21,15 @@ server
     // (styles || []).length = 0;
     const css: Array<{ id: string; css: string; }> = []; // CSS for all rendered React components
     const insertCss = (...styleList: any[]) => styleList.forEach((style) => {
-      const content = style._getContent();
-      content.forEach((c: any) => {
-        css.push({
-          id: c[0],
-          css: c[1],
+      if (style._getContent) {
+        const content = style._getContent();
+        content.forEach((c: any) => {
+          css.push({
+            id: c[0],
+            css: c[1],
+          });
         });
-      });
+      }
     });
     const html = await render({
       req,
@@ -46,11 +48,12 @@ server
         ))
       }),
     });
+    console.log(req.url);
     const htmlWithCommonCss = (html || '')
       .replace(
         '</head>', 
         `<link rel="stylesheet" href="${assets['vendor'].css}">
-        <link rel="stylesheet" href="${assets['common'].css}">
+        <link rel="stylesheet" href="${assets['common'].css || ''}">
         </head>`);
     const styles = getStyles();
     if (styles) {
@@ -64,7 +67,7 @@ server
     }
     if (css.length) {
       const styleStrs = css
-        .map((s) => `<style text="text/css" id="${s.id}">${s.css}</style>`)
+        .map((s) => `<style text="text/css" key="${s.id}">${s.css}</style>`)
         .join('');
       res.send(
         htmlWithCommonCss

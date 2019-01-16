@@ -1,10 +1,10 @@
 
 import { Alignment, Button, Navbar } from '@blueprintjs/core';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import * as React from 'react';
 import S from './App.common.less';
-import { Header } from './Header';
 
-export class App extends React.Component<App.Props> {
+class App extends React.Component<App.Props> {
   render() {
     return (
       <div className={S.App}>
@@ -25,3 +25,5 @@ export namespace App {
   export type Props = {
   };
 }
+
+export default withStyles(S)(App);

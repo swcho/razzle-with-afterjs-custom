@@ -60,7 +60,6 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
     // chunkFilename: IS_DEV ? '[id].css' : '[id].[hash].css',
   }));
 
-
   const localIdentName = '[path][name]_[local]';
 
   config.module.rules.push({
@@ -92,7 +91,7 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
     use: IS_DEV
       ? [
         {
-          loader: MiniCssExtractPlugin.loader,
+          loader: require.resolve('isomorphic-style-loader'),
         },
         {
           loader: require.resolve('css-loader'),
