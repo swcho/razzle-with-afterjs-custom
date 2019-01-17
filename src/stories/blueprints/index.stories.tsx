@@ -1,6 +1,7 @@
 import { Breadcrumb, Breadcrumbs, Button, IBreadcrumbProps, Icon } from '@blueprintjs/core';
 import { IconName, IconNames } from '@blueprintjs/icons';
 import { action } from '@storybook/addon-actions';
+import { withInfo } from '@storybook/addon-info';
 import { boolean, select, text, withKnobs } from '@storybook/addon-knobs/react';
 import { linkTo } from '@storybook/addon-links';
 import { storiesOf } from '@storybook/react';
@@ -11,6 +12,7 @@ console.log('======');
 
 storiesOf('Blueprints', module)
   .addDecorator(withKnobs)
+  .addDecorator(withInfo({ inline: true }))
   .add('Breadcrumbs', () => {
     const BREADCRUMBS: IBreadcrumbProps[] = [
       { icon: 'folder-close', text: 'Users', onClick: action('Click Users') },
