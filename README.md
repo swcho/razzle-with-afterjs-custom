@@ -46,3 +46,5 @@ This is a basic, bare-bones example of how to use After.js and Razzle.
 * [ ] Fetch/mock
 * [ ] Jest snapshot test
 * [ ] Graphql
+* [ ] Test
+  * [ ] Jest storybook snapshot
