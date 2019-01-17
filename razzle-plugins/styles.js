@@ -38,13 +38,13 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
       // chunks: 'all'
       cacheGroups: {
         vendor: {
-          name: 'style-vendor',
+          name: 'vendor',
           test: /(\.vendor\.less$|node_modules\/)/,
           chunks: 'initial',
           enforce: true,
         },
         common: {
-          name: 'style-common',
+          name: 'common',
           test: /\/src\/components\/.*\.(less|tsx)$/,
           chunks: 'all',
           enforce: true,

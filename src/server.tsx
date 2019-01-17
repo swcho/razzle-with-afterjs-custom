@@ -63,8 +63,8 @@ server
       .replace(
         '</head>', 
         `
-        ${makeAssetTags(assets, 'style-vendor')}
-        ${makeAssetTags(assets, 'style-common')}
+        ${makeAssetTags(assets, 'vendor')}
+        ${makeAssetTags(assets, 'common')}
         </head>`);
     if (css.length) {
       const styleStrs = css
