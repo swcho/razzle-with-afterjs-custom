@@ -8,7 +8,16 @@ module.exports = (baseConfig, env, config) => {
       loader: require.resolve('react-docgen-typescript-loader')
     }]
   });
+  config.module.rules.push({
+    test: /\.(less)$/,
+    use: [{
+      loader: require.resolve('style-loader')
+    }, {
+      loader: require.resolve('css-loader')
+    }, {
+      loader: require.resolve('less-loader')
+    }]
+  });
   config.resolve.extensions.push('.ts', '.tsx');
-  config
   return config;
 };
