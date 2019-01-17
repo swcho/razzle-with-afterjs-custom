@@ -22,7 +22,8 @@ This is a basic, bare-bones example of how to use After.js and Razzle.
 
 ## Check List
 
-* [*] TypeScript 지원
+* [*] TypeScript
+  * Next.js, CRA requires babel7 but it doesn't support `namespace` keyword.
 * [*] Debugability:
   * <https://github.com/jaredpalmer/razzle/issues/546#issuecomment-377628210>
 * [*] eslint with type
@@ -31,9 +32,14 @@ This is a basic, bare-bones example of how to use After.js and Razzle.
   * [*] CSS module
   * [*] Common component style to text
   * [*] CSS SSR Awareness(not adding style if exists): Fail to fork style-loader, use isomorphic-style-loader
-* [ ] Storybook 지원
+* [*] Storybook
 * [ ] SEO
   * [ ] Dynamic title
+* [ ] Use case
+  * [ ] Blog
+  * [ ] CMS
+  * [ ] Dashboard
+  * [ ] Rich
 * [ ] Redux
 * [ ] Routing
   * [ ] Dirty detect
