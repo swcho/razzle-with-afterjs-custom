@@ -30,9 +30,6 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
     // config.devtool = 'eval'
   }
 
-  const RE_VENDOR_CSS = /(\.vendor\.less$|node_modules\/.*\.css$)/;
-  const RE_COMMON = /\.common\.less$/;
-
   if (!config.optimization) {
     config.optimization = {};
   }
@@ -42,13 +39,13 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
       cacheGroups: {
         vendor: {
           name: 'style-vendor',
-          test: RE_VENDOR_CSS,
-          chunks: 'all',
+          test: /(\.vendor\.less$|node_modules\/)/,
+          chunks: 'initial',
           enforce: true,
         },
         common: {
           name: 'style-common',
-          test: RE_COMMON,
+          test: /\/src\/components\/.*\.(less|tsx)$/,
           chunks: 'all',
           enforce: true,
         }
@@ -62,8 +59,9 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
 
   const localIdentName = '[path][name]_[local]';
 
+  const RE_VENDOR_STYLE = /(\.vendor\.less$|node_modules\/.*\.css$)/;
   config.module.rules.push({
-    test: RE_VENDOR_CSS,
+    test: RE_VENDOR_STYLE,
     use: [
       {
         loader: MiniCssExtractPlugin.loader,
@@ -86,12 +84,15 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
     ]
   })
 
+  const RE_COMMON_STYLE = /\/src\/components\/.*\.less$/;
   config.module.rules.push({
-    test: RE_COMMON,
+    test: RE_COMMON_STYLE,
     use: IS_DEV
       ? [
         {
-          loader: IS_NODE ? MiniCssExtractPlugin.loader : require.resolve('isomorphic-style-loader'),
+          loader: IS_NODE
+            ? require.resolve('isomorphic-style-loader') //MiniCssExtractPlugin.loader
+            : require.resolve('isomorphic-style-loader'),
         },
         {
           loader: require.resolve('css-loader'),
@@ -138,7 +139,7 @@ module.exports = (config, { target, dev }, webpack, userOptions = {}) => {
 
   config.module.rules.push({
     test: /\.less$/,
-    exclude: [RE_VENDOR_CSS, RE_COMMON],
+    exclude: [RE_VENDOR_STYLE, RE_COMMON_STYLE],
     use: IS_DEV
       ? [
         {

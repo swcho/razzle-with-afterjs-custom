@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import App from './component/App';
+import App from './components/App';
 
 export class AppPage extends React.Component<AppPage.Props> {
   render() {

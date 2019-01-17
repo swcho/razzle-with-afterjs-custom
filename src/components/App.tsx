@@ -2,7 +2,7 @@
 import { Alignment, Button, Navbar } from '@blueprintjs/core';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import * as React from 'react';
-import S from './App.common.less';
+import S from './App.less';
 
 class App extends React.Component<App.Props> {
   render() {
