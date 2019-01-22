@@ -2,37 +2,44 @@
 import { Ctx, InjectedProps } from '@jaredpalmer/after';
 import * as React from 'react';
 import { RouteParams } from './routes';
-import { getPosts, Post } from './services/jsonplaceholder';
+import { getPost, getPosts, Post } from './services/jsonplaceholder';
 
 type InitialCtx = Ctx<RouteParams>;
 
 class PostPage extends React.Component<PostPage.Props> {
 
   static async getInitialProps(props: InitialCtx): Promise<PostPage.OwnProps> {
-    const posts = await getPosts();
-    return { posts };
+    const {
+      match: {
+        params: {
+          postId,
+        }
+      }
+    } = props;
+    const post = await getPost(postId);
+    return { post };
   }
 
   static renderPost = (post: Post) => <li key={post.id}>{post.title}</li>;
 
   render() {
     const {
-      posts,
+      post,
     } = this.props;
-    return (
+    return post ? (
       <div>
-        <h1>Post Page</h1>
-        <ul>
-          {posts.map(PostPage.renderPost)}
-        </ul>
+        <h1>{post.title}</h1>
+        <p>{post.body}</p>
       </div>
+    ) : (
+      <div/>
     );
   }
 }
 
 namespace PostPage {
   export type OwnProps = {
-    posts: Post[];
+    post: Post;
   };
 
   export type Props = {

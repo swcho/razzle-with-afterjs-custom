@@ -9,3 +9,5 @@ export type Post = {
 };
 
 export const getPosts = () => fetch(`${BASE_URL}/posts`).then<Post[]>((resp) => resp.json());
+
+export const getPost = (id: number | string) => fetch(`${BASE_URL}/posts/${id}`).then<Post>((resp) => resp.json());
