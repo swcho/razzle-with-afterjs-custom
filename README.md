@@ -36,7 +36,7 @@ This is a basic, bare-bones example of how to use After.js and Razzle.
 * [ ] SEO
   * [ ] Dynamic title
 * [ ] Use case
-  * [ ] Blog
+  * [*] Posts
   * [ ] CMS
   * [ ] Dashboard
   * [ ] Rich
