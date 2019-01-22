@@ -23,7 +23,15 @@ const routes: AsyncRouteProps[] = [
     }),
   },
   {
-    path: '/*',
+    path: '/posts*',
+    exact: true,
+    component: asyncComponent({
+      loader: () => import('./PostPage'), // required
+      Placeholder: () => <div>...LOADING...</div>, // this is optional, just returns null by default
+    }),
+  },
+  {
+    path: '/app',
     exact: true,
     component: asyncComponent({
       loader: () => import('./AppPage'), // required
