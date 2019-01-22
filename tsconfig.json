@@ -21,8 +21,8 @@
     "pretty": true,
     "suppressImplicitAnyIndexErrors": true,
     "target": "es2016",
-    "baseUrl": "",
-    "paths": { "*": ["node_modules/@types/*", "*"] }
+    // "baseUrl": "",
+    // "paths": { "*": ["node_modules/@types/*", "*"] }
   },
   "exclude": [
     "node_modules",

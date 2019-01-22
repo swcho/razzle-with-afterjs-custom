@@ -1,9 +1,11 @@
 import React from 'react';
 
-import { asyncComponent, AsyncRouteProps } from '@jaredpalmer/after';
+import { asyncComponent, AsyncRouteProps, Ctx } from '@jaredpalmer/after';
 
 export type RouteParams = {
 };
+
+export type InitialCtx = Ctx<RouteParams>;
 
 const routes: AsyncRouteProps[] = [
   {

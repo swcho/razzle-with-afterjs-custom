@@ -13,7 +13,9 @@
   "dependencies": {
     "@blueprintjs/core": "^3.11.0",
     "@jaredpalmer/after": "https://github.com/swcho/after.js#custom",
+    "es6-promise": "^4.2.5",
     "express": "^4.16.2",
+    "isomorphic-fetch": "^2.2.1",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.6.2",
     "razzle": "^2.4.1",

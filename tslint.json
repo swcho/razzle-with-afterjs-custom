@@ -32,7 +32,7 @@
     "no-duplicate-variable": true,
     "no-empty": true,
     "no-eval": true,
-    "no-shadowed-variable": [true, { "text": false }],
+    "no-shadowed-variable": false,
     "no-string-literal": false,
     "no-submodule-imports": false,
     "no-switch-case-fall-through": true,

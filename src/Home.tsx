@@ -4,10 +4,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import S from './Home.less';
 import logo from './react.svg';
-import { RouteParams } from './routes';
-
-// TODO: Define Commonly
-type InitialCtx = Ctx<RouteParams>;
+import { InitialCtx } from './routes';
 
 class Home extends Component<Home.Props> {
   static async getInitialProps(props: InitialCtx): Promise<Home.OwnProps> {
