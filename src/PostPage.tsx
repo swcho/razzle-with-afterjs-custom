@@ -1,6 +1,7 @@
 
 import { Ctx, InjectedProps } from '@jaredpalmer/after';
 import * as React from 'react';
+import Helmet from 'react-helmet';
 import { RouteParams } from './routes';
 import { getPost, getPosts, Post } from './services/jsonplaceholder';
 
@@ -28,6 +29,10 @@ class PostPage extends React.Component<PostPage.Props> {
     } = this.props;
     return post ? (
       <div>
+        <Helmet>
+          <title>{post.title}</title>
+          <meta name="twitter:card" content={post.body}/>
+        </Helmet>
         <h1>{post.title}</h1>
         <p>{post.body}</p>
       </div>

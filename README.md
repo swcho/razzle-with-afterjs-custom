@@ -33,8 +33,9 @@ This is a basic, bare-bones example of how to use After.js and Razzle.
   * [*] Common component style to text
   * [*] CSS SSR Awareness(not adding style if exists): Fail to fork style-loader, use isomorphic-style-loader
 * [*] Storybook
-* [ ] SEO
-  * [ ] Dynamic title
+* [*] SEO
+  * [*] Dynamic title
+  * [*] Dynamic meta
 * [ ] Use case
   * [*] Posts
   * [ ] CMS
